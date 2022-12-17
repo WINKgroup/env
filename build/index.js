@@ -25,15 +25,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var dotenv = __importStar(require("dotenv"));
+var fs_1 = __importDefault(require("fs"));
 var Env = /** @class */ (function () {
     function Env() {
     }
     Env.loader = function () {
-        var env = dotenv.config({ path: this.configFilePath });
-        if (env.error)
-            console.warn(env.error);
+        if (fs_1.default.existsSync(this.configFilePath)) {
+            var env = dotenv.config({ path: this.configFilePath });
+            if (env.error)
+                console.warn(env.error);
+        }
+        else
+            console.warn("no config file at ".concat(this.configFilePath));
         this.loaded = true;
     };
     Env.get = function (key, defaultValue) {

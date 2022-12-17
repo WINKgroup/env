@@ -3,6 +3,7 @@
  */
 
 import * as dotenv from 'dotenv'
+import fs from 'fs'
 
 export default class Env {
     static loaded = false
@@ -11,8 +12,11 @@ export default class Env {
     private constructor() {}
 
     private static loader() {
-        const env = dotenv.config({path: this.configFilePath})
-        if (env.error) console.warn( env.error )
+        if (fs.existsSync(this.configFilePath)) {
+            const env = dotenv.config({path: this.configFilePath})
+            if (env.error) console.warn( env.error )
+        }
+            else console.warn(`no config file at ${ this.configFilePath }`)
         this.loaded = true
     }
 
