@@ -1,6 +1,6 @@
 {
   "name": "@winkgroup/env",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Utility library used in WiNK for tasks related with dotenv",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
